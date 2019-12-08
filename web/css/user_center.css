@@ -1,0 +1,61 @@
+body {
+    background-repeat: no-repeat;
+}
+.thumbnail{
+    border: 0px;
+    background: transparent;
+    margin-right: 5px;
+    margin-top: 20px;
+}
+.tab-ul li{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.layui-btn{
+    border: 0px;
+    margin-left: 0px;
+}
+.layui-nav{
+    background-color: transparent;
+}
+.layui-nav .layui-nav-item a{
+    color: black;
+}
+.layui-nav .layui-nav-item a:hover{
+    color: black;
+}
+.layui-btn-primary{
+    background-color: transparent;
+}
+.layui-col-md-offset1{
+    margin-left: 3.033333%;
+}
+.tab-btn{
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 18px;
+    background-color: white;
+    color: black;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    outline: 0;
+    -webkit-appearance: none;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    box-sizing: border-box;
+    margin:20px 0px 10px 0px;
+}
+.layui-table{
+    margin-left: 200px;
+}
+.layui-form-label{
+    padding: 0px 0px;
+}
+.layui-form{
+    margin-top: 10%;
+}

@@ -20,17 +20,17 @@ public class GarbageSearch extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("GBK");
-        response.setCharacterEncoding("GBK");
+        response.setContentType("text/html;charset=GBK");
         String garbage_name = new String(request.getParameter("garbage_name").getBytes("iso-8859-1"),"utf-8");
         //user.setAddr(user_addr);
+        System.out.println(garbage_name);
         PrintWriter out=response.getWriter();
         GarbageDao dao = new GarbageDao();
         List<Garbage> user_list = dao.search(garbage_name);
         if(user_list.isEmpty())
         {
-            out.print("<script>alert('未找到查询项，返回首页');</script>");
-            out.print("<script>window.location='/forjsp/index.jsp'; </script>");
+            out.print("<script>alert('未找到查询项');</script>");
+            out.print("<script>window.location='/forjsp/garbage.jsp'; </script>");
             out.close();
         }
         else {

@@ -5,12 +5,13 @@
   Time: 14:51
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>注册</title>
     <script src="../layui-v2.5.5/layui/layui.all.js"></script>
 
     <link rel="stylesheet" href="../layui-v2.5.5/layui/css/layui.css">
@@ -26,7 +27,7 @@
     <div class="layui-row">
         <div class="layui-col-md1 layui-col-xs2 nav-right"style="height: 100vh">
             <img src="../img/logo.png"class="img-right">
-            <h5>易分垃圾网</h5>
+            <h5>易分环保网</h5>
             <button type="button"  class="left-btn">
                 <span class="layui-icon layui-icon-home"><a href="../forjsp/index.jsp">首页</a></span>
             </button><br/>
@@ -37,10 +38,7 @@
                 <span class="layui-icon layui-icon-read"><a href="../forjsp/garbage.jsp">分类指南</a></span>
             </button>
             <button type="button"  class="left-btn">
-                <span class="layui-icon layui-icon-search"><a href="../forjsp/garbage.jsp">分类查询</a></span>
-            </button>
-            <button type="button"  class="left-btn">
-                <span class="layui-icon layui-icon-release"><a href="../forjsp/garbage.jsp">新闻中心</a></span>
+                <span class="layui-icon layui-icon-release"><a href="../forjsp/news_center.jsp">新闻中心</a></span>
             </button>
             <br>
             <span class="layui-icon layui-icon-login-wechat font"></span>
@@ -70,19 +68,11 @@
                         <input type="password" name="repasswd" required lay-verify="repass" placeholder="请再次确认密码" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-
-                <div class="layui-form-item">
-                    <div class="layui-input-block" style="width: 36px;">
-                        <input type="checkbox" name="" title="记住我" lay-skin="primary">
-                    </div>
-                </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button lay-submit class="layui-btn" lay-filter="login" id="reg">注册</button>
                     </div>
                 </div>
-
-
             </form>
         </div>
     </div>

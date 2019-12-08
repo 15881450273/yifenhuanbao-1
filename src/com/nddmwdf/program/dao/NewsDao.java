@@ -10,14 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsDao {
-    public void addNews(String title,String text,String time,String author)
+    public void addNews(String title,String text,String type,String time,String author)
     {
         DbUtil dbUtil = new DbUtil();
         Connection con = dbUtil.getConnection();
-        String sql = "INSERT INTO news(news_title,news_text,news_time,news_author) VALUES('"  + title + "','" + text +"','" + time +"','" + author + "')";
+        String sql = "INSERT INTO news(news_title,news_text,news_type,news_time,news_author) VALUES('"  + title + "','" + text +"','" + type +"','"+ time +"','" + author + "')";
         try {
             Statement st = con.createStatement();
             st.executeUpdate(sql);
+            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -32,20 +33,22 @@ public class NewsDao {
         try {
             Statement st = con.createStatement();
             st.executeUpdate(sql);
+            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         dbUtil.closeCon();
     }
 
-    public void alterNews(int nid,String title,String text,String time,String author)
+    public void alterNews(int nid,String title,String text,String type,String time,String author)
     {
         DbUtil dbUtil = new DbUtil();
         Connection con = dbUtil.getConnection();
-        String sql = "UPDATE news SET news_title='"+title+"',news_text='"+text+"',news_time='"+time+"',news_author='"+author+"' where news_id='"+nid+"'";
+        String sql = "UPDATE news SET news_title='"+title+"',news_text='"+text+"',news_type='"+type+"',news_time='"+time+"',news_author='"+author+"' where news_id='"+nid+"'";
         try {
             Statement st = con.createStatement();
             st.executeUpdate(sql);
+            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -91,6 +94,7 @@ public class NewsDao {
             resultSet=st.executeQuery(sql);
             resultSet.next();
             totalnews=resultSet.getInt(1);
+            resultSet.close();
             return totalnews;
         }
         catch (Exception e)
@@ -101,9 +105,9 @@ public class NewsDao {
         return 0;
     }
 
-    public List<News> defaultnews() throws ClassNotFoundException ,SQLException
+    public List<News> typenews(String type) throws ClassNotFoundException ,SQLException
     {
-        String sql="select * from news";
+        String sql="SELECT * FROM news where news_type ='"+type +"'";
         DbUtil dbUtil=new DbUtil();
         Connection connection=dbUtil.getConnection();
         ResultSet resultSet;
@@ -113,7 +117,7 @@ public class NewsDao {
         while (resultSet.next())
         {
             News news = new News();
-            news.setId(resultSet.getInt("news_id"));
+            //news.setId(resultSet.getInt("news_id"));
             news.setTitle(resultSet.getString("news_title"));
             news.setText(resultSet.getString("news_text"));
             news.setTime(resultSet.getString("news_time"));
@@ -124,5 +128,26 @@ public class NewsDao {
         ps.close();
         dbUtil.closeCon();
         return nw;
+    }
+
+    public News newsFind(String title) throws SQLException {
+        String sql="select * from news where news_title = '" + title +"'";
+        DbUtil dbUtil = new DbUtil();
+        Connection con = dbUtil.getConnection();
+        ResultSet resultSet = null;
+        PreparedStatement ps = con.prepareStatement(sql);
+        resultSet = ps.executeQuery();
+        News news = new News();
+        while (resultSet.next()) {
+            news.setId(resultSet.getInt("news_id"));
+            news.setTitle(resultSet.getString("news_title"));
+            news.setText(resultSet.getString("news_text"));
+            news.setTime(resultSet.getString("news_time"));
+            news.setAuthor(resultSet.getString("news_author"));
+        }
+        resultSet.close();
+        ps.close();
+        dbUtil.closeCon();
+        return news;
     }
 }

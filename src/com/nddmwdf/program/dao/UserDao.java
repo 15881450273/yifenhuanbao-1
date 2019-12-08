@@ -18,6 +18,7 @@ public class UserDao {
         try {
             Statement st = con.createStatement();
             st.executeUpdate(sql);
+            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,6 +34,7 @@ public class UserDao {
         {
             Statement st=con.createStatement();
             st.executeUpdate(sql);
+            st.close();
         }
         catch (Exception e)
         {
@@ -48,6 +50,7 @@ public class UserDao {
         String sql = "UPDATE users SET user_Name='"+akaname+"',user_Sex='"+sex+"' where user_loginName='"+username+"'";
         Statement st=con.createStatement();
         st.executeUpdate(sql);
+        st.close();
         dbUtil.closeCon();
     }
 
@@ -69,6 +72,8 @@ public class UserDao {
             {
                 valid=true;
             }
+            rs.close();
+            pst.close();
         }
         catch (Exception e)
         {
@@ -97,6 +102,8 @@ public class UserDao {
                 user.setId(resultSet.getInt("user_id"));
                 user.setLoginName(resultSet.getString("user_loginName"));
             }
+            resultSet.close();
+            ps.close();
         }
         catch (SQLException e)
         {
@@ -147,12 +154,15 @@ public class UserDao {
             resultSet=st.executeQuery(sql);
             resultSet.next();
             totalnum=resultSet.getInt(1);
+            resultSet.close();
+            st.close();
             return totalnum;
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+
         dbUtil.closeCon();
         return 0;
     }
@@ -182,10 +192,13 @@ public class UserDao {
         rs=ps.executeQuery();
         while(rs.next())
         {
+            user.setId(Integer.parseInt(rs.getString("user_id")));
             user.setName(rs.getString("user_Name"));
             user.setLoginName(rs.getString("user_loginName"));
             user.setSex(rs.getString("user_Sex"));
         }
+        rs.close();
+        ps.close();
         dbUtil.closeCon();
         return user;
     }
@@ -202,8 +215,8 @@ public class UserDao {
             //链接数据库
             con = dbUtil.getConnection();
             //MySQL语句
-            String sql = "SELECT * FROM invitation.post_t  order by invitation.post_t.T_time desc  ";//论坛页面需要全部帖子的sql查询语句
-            String sql1 = "SELECT * FROM invitation.post_t where user_id = ? and T_id = ? order by invitation.post_t.T_time desc  ";//回复页面查具体帖子需要的sql语句
+            String sql = "SELECT * FROM post_t  order by post_t.T_time desc  ";//论坛页面需要全部帖子的sql查询语句
+            String sql1 = "SELECT * FROM post_t where user_id = ? and T_id = ? order by post_t.T_time desc  ";//回复页面查具体帖子需要的sql语句
             if (post_id < 0) {
                 ps = con.prepareStatement(sql);//预编译
                 rs = ps.executeQuery();//执行
@@ -222,13 +235,13 @@ public class UserDao {
                 inv.setPost_content(rs.getString("T_content"));
                 inv.setPost_time(rs.getString("T_time"));
                 inv.setPost_id(rs.getInt("T_id"));
-
                 invitationArrayList.add(inv);
-
             }
             if (rs.next()) {
                 return null;
             }
+            rs.close();
+            ps.close();
 
         } catch (SQLException  e) {
             e.printStackTrace();
@@ -247,8 +260,8 @@ public class UserDao {
             //链接数据库
             con = dbUtil.getConnection();
             //MySQL语句
-            String sql = "SELECT * FROM invitation.message_port WHERE T_id = ? and U_id =? order by invitation.message_port.M_time  ";//论坛页面每个文章下的评论，查询语句
-            String sql1 = "SELECT * FROM invitation.message_port WHERE B_id = ? GROUP BY U_id,T_id,M_id order by M_time desc ";//回复页面需要的查询语句
+            String sql = "SELECT * FROM message_port WHERE T_id = ? and U_id =? order by message_port.M_time  ";//论坛页面每个文章下的评论，查询语句
+            String sql1 = "SELECT * FROM message_port WHERE B_id = ? GROUP BY U_id,T_id,M_id order by M_time desc ";//回复页面需要的查询语句
             if (t_id < 0) {
                 ps = con.prepareStatement(sql1);//预编译
                 ps.setObject(1, u_id);
@@ -273,7 +286,8 @@ public class UserDao {
                 message_list.add(msg);
             }
             //DBUtil.closeCon(con,ps,rs);
-
+            rs.close();
+            ps.close();
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -293,8 +307,8 @@ public class UserDao {
             //链接数据库
             con =dbUtil.getConnection();
             //MySQL语句
-            String sql = "SELECT * FROM invitation.message_port WHERE ( T_id = ? and U_id =? ) and (M_id = ?  or (B_id = ? and M_id = ?)) order by invitation.message_port.M_time  ";
-            String sql1 = "SELECT * FROM invitation.message_port WHERE B_id = ? GROUP BY U_id,T_id,M_id order by M_time";
+            String sql = "SELECT * FROM message_port WHERE ( T_id = ? and U_id =? ) and (M_id = ?  or (B_id = ? and M_id = ?)) order by message_port.M_time  ";
+            String sql1 = "SELECT * FROM message_port WHERE B_id = ? GROUP BY U_id,T_id,M_id order by M_time";
             if (t_id < 0) {
                 ps = con.prepareStatement(sql1);//预编译
                 ps.setObject(1, u_id);
@@ -328,6 +342,28 @@ public class UserDao {
         }
         dbUtil.closeCon();
         return message_list;
+    }
+
+    public User getUser(int id) throws SQLException
+    {
+        DbUtil dbUtil = new DbUtil();
+        Connection con = dbUtil.getConnection();
+        String sql="Select * from users where user_id ='"+id+"'";
+        User user=new User();
+        ResultSet rs;
+        PreparedStatement ps = con.prepareStatement(sql);
+        rs=ps.executeQuery();
+        while(rs.next())
+        {
+            //user.setId(Integer.parseInt(rs.getString("user_id")));
+            user.setName(rs.getString("user_Name"));
+            user.setLoginName(rs.getString("user_loginName"));
+            user.setSex(rs.getString("user_Sex"));
+        }
+        rs.close();
+        ps.close();
+        dbUtil.closeCon();
+        return user;
     }
 
 }

@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.nddmwdf.program.dao.GarbageDao" %>
+<%@ page import="com.nddmwdf.program.entity.Garbage" %><%--
   Created by IntelliJ IDEA.
   User: ASUS
   Date: 2019/10/21
@@ -7,7 +8,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
+<%
+    String name=request.getParameter("garbagename");
+    GarbageDao garbageDao=new GarbageDao();
+    Garbage garbage=garbageDao.getGarbage(name);
+%>
 <head>
     <meta charset="UTF-8">
     <title>欢迎页面-L-admin1.0</title>
@@ -34,7 +39,7 @@
                 <span class="x-red">垃圾编号不能修改</span>编号
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="gid" name="gid" required lay-verify="required"
+                <input value="<%=garbage.getId()%>" readonly  type="text" id="gid" name="gid" required lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -43,7 +48,7 @@
                 <span class="x-red">*</span>垃圾名
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="gname" name="gname" required lay-verify="required"
+                <input value="<%=garbage.getName()%>" readonly type="text" id="gname" name="gname" required lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -56,6 +61,8 @@
                 <select id="shipping" name="gtype" class="valid">
                     <option value="干垃圾">干垃圾</option>
                     <option value="湿垃圾">湿垃圾</option>
+                    <option value="可回收物">可回收物</option>
+                    <option value="有害垃圾">有害垃圾</option>
                 </select>
             </div>
         </div>

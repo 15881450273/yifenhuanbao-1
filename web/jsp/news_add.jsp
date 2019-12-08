@@ -25,7 +25,7 @@
     <%--<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>--%>
     <%--<![endif]-->--%>
 </head>
-
+<script src="//cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 <body>
 <div class="x-body">
     <form class="layui-form"  method="post" action="/NewsServlet">
@@ -46,6 +46,20 @@
             <div class="layui-input-inline">
                 <input type="text" id="newsauthor" name="news_author" required lay-verify="required"
                        autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="newsname" class="layui-form-label">
+                <span class="x-red">*</span>类别
+            </label>
+            <div class="layui-input-inline">
+                <select id="shipping" name="news_type" class="valid">
+                    <option value="通知">通知</option>
+                    <option value="热点">热点</option>
+                    <option value="国内要闻">国内要闻</option>
+                    <option value="国际资讯">国际资讯</option>
+                </select>
             </div>
         </div>
 
@@ -75,6 +89,7 @@
                 增加
             </button>
         </div>
+
     </form>
 </div>
 

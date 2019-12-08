@@ -106,7 +106,7 @@
                 <tbody>
                 <tr>
                     <td >
-                        <a class="x-a" href="/" target="_blank">交流qq:1016939850</a>
+                        <a class="x-a" href="#" target="_blank">交流qq:1016939850</a>
                     </td>
                 </tr>
                 </tbody>

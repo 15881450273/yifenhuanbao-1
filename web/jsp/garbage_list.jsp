@@ -102,7 +102,7 @@
             <td>${garbage.type}</td>
 
             <td class="td-manage">
-                <a title="修改"  onclick="x_admin_show('编辑','')" href="/jsp/garbage_alter.jsp">
+                <a title="修改"  onclick="x_admin_show('编辑','')" href="/jsp/garbage_alter.jsp?garbagename=${garbage.name}">
                     <i class="layui-icon">&#xe63c;</i>
                 </a>
                 <a title="删除" onclick="" href="/GarbageDelete?garbageid=${garbage.id}">

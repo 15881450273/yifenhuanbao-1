@@ -4,7 +4,16 @@ public class News {
     private int id;
     private String title;
     private String text;
-    private String picture;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     private String time;
 
     public int getId() {
@@ -29,14 +38,6 @@ public class News {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 
     public String getTime() {

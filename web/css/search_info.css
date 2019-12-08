@@ -4,42 +4,92 @@
 }
 html,body{
     width: 100%;
+
+    background-image: url("../img/united-squares.png");
+    /*background-repeat: repeat;*/
 }
 a {
     text-decoration: none;
-    color: #000;
+    color: white;
 }
 
 /*导航栏样式部分*/
-.nav{
-    width: 100%;
-    height: 70px;
+.top{
+    height: 60px;
+    background-color: #009688;
 
 }
-.nav ul{
+.top span{
+    display:inline-block;
+    width: 10%;
+    height: 60px;
+    margin-left: 20px;
+}
+.top span p{
+    line-height: 10px;
+    letter-spacing: 3px;
+    margin-left: 70px;
+    width: 100px;
+    color:white;
+    margin-top: 25px;
+    font-size: 14px;
+
+}
+.top img{
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+.top_nav{
+    width: 50%;
+    height: 60px;
+    float:right;
+    /*margin-left: 280px;*/
+}
+.top_nav a{
+    text-decoration: none;
+    color:white;
+    font-size: 14px;
+
+}
+.top_nav img{
+    width: 20px;
+    height: 20px;
+}
+.top_nav ul{
+    width: 100%;
+}
+.top_nav ul li{
+    float:left;
+    margin-right: 50px;
+    margin-top: 25px;
     list-style: none;
 }
-/*.nav ul:nth-child(2){*/
-/*margin-left: 400px;*/
-/*}*/
-p{
-    display: inline-block;
-    width: 170px;
-    height: 20px;
-    position: relative;
-    left: 250px;
-    top: 10px;
+.top_nav ul li a img{
+    padding-right: 4px;
 }
-.nav ul li{
-    float: left;
-    /*margin-left: 400px;*/
-    padding: 15px 30px;
+.top_nav ul li a img{
+    padding-right: 4px;
+}
+.p_class{
+    width: 30%;
+    height: 30px;
+    font-size: 18px;
+    display: inline-block;
+    font-weight: 600;
+}
+.center{
+    width: 40%;
+    margin:30px auto;
 }
 .search1,.search2,.search3{
     width: 550px;
     height: 100px;
-    border: 2px solid pink;
-    margin:20px auto;
+    border: 2px solid #bdcc3e;
+    margin:15px auto;
+    border-radius: 20px;
+    padding-left: 40px;
+    background-color: #fff;
 }
 .search3 ul li{
     margin-left: 20px;

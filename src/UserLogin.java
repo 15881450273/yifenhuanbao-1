@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/UserLogin")
 public class UserLogin extends HttpServlet{
@@ -22,19 +23,25 @@ public class UserLogin extends HttpServlet{
         UserDao userDao=new UserDao();
         String name=new String(request.getParameter("username").getBytes("iso-8859-1"),"utf-8");
         String pwd=new String(request.getParameter("password").getBytes("iso-8859-1"),"utf-8");
+        System.out.println(name);
         user.setLoginName(name);
         user.setLoginPass(pwd);
         String userName=user.getLoginName();
+        PrintWriter out=response.getWriter();
         try
         {
             if(userDao.validateUser(user))
             {
                 request.getSession().setAttribute("username",userName);
-                request.getRequestDispatcher("forjsp/index.jsp").forward(request,response);
+                out.print("<script>alert('登录成功');</script>");
+                out.print("<script>window.location='/forjsp/index.jsp'; </script>");
+                out.close();
             }
             else
             {
-                request.getRequestDispatcher("forjsp/login.jsp").forward(request,response);
+                out.print("<script>alert('登录失败了，看看是不是密码输错了。');</script>");
+                out.print("<script>window.location='/forjsp/login.jsp'; </script>");
+                out.close();
             }
         }
         catch (Exception e)

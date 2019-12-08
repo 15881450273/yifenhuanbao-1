@@ -26,6 +26,8 @@ public class AdminDao {
                 admin.setUserid(resultSet.getInt("userid"));
                 admin.setLoginName(resultSet.getString("loginName"));
             }
+            resultSet.close();
+            ps.close();
         }
         catch (SQLException e)
         {
@@ -47,6 +49,7 @@ public class AdminDao {
         try {
             Statement st = con.createStatement();
             st.executeUpdate(sql);
+            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,6 +74,8 @@ public class AdminDao {
             {
                 valid=true;
             }
+            pst.close();
+            rs.close();
         }
         catch (Exception e)
         {

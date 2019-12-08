@@ -39,15 +39,14 @@
                        autocomplete="off" class="layui-input">
             </div>
         </div>
-
         <div class="layui-form-item">
             <label for="gname" class="layui-form-label">
                 <span class="x-red">*</span>类别
             </label>
             <div class="layui-input-inline">
                 <select id="shipping" name="gtype" class="valid">
-                    <%--<option value="干垃圾">干垃圾</option>--%>
-                    <%--<option value="湿垃圾">湿垃圾</option>--%>
+                    <option value="干垃圾">干垃圾</option>
+                    <option value="湿垃圾">湿垃圾</option>
                     <option value="可回收物">可回收物</option>
                     <option value="有害垃圾">有害垃圾</option>
                 </select>

@@ -9,43 +9,118 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.nddmwdf.program.entity.Garbage" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.nddmwdf.program.dao.TypeDao" %>
+<%@ page import="com.nddmwdf.program.entity.Type" %>
+<%@ page import="com.nddmwdf.program.entity.User" %>
 <html lang="en">
+<%
+    User user =(User) session.getAttribute("user");
+    String loginName=user.getLoginName();
+%>
 <link rel="stylesheet" href="../css/search_info.css">
 <!--<link rel="stylesheet" href="./css/search.css">-->
+<link rel="stylesheet" href="../layui-v2.5.5/layui/css/layui.css">
 <head>
     <meta charset="UTF-8">
     <title>搜索结果</title>
 </head>
 <body>
 <!--导航栏部分-->
-<div class="nav">
-    <ul>
-        <li><img src="../img/树叶.png" alt=""></li>
-        <li>易分垃圾网</li>
-        <li><a href="../forjsp/index.jsp">首页</a></li>
-        <li><a href="../forjsp/garbage.jsp">分类指南</a></li>
-        <li><a href="../forjsp/search_result.jsp">分类查询</a></li>
-        <li><a href="../forjsp/news_center.jsp">新闻中心</a></li>
-    </ul>
+<!--顶部导航栏部分-->
+<div class="layui-fluid"style="padding: 0px;">
+    <div class="layui-row">
+        <div class="layui-col-md6 layui-col-sm3 layui-col-xs2">
+            <ul class="layui-nav layui-bg-green">
+                <li class="layui-nav-item">
+                    <img src="../img/树叶.png">
+                </li>
+                <li class="layui-nav-item">
+                    <a href="#">易分环保网</a>
+                </li>
+            </ul>
+        </div>
+        <div class="layui-col-md6 layui-col-xs3 layui-col-sm3">
+            <ul class="layui-nav layui-bg-green">
+                <li class="layui-nav-item">
+                    <a href="../forjsp/index.jsp">
+                        <span class="layui-icon layui-icon-home">首页</span>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="../forjsp/garbage.jsp">
+                        <span class="layui-icon layui-icon-app">分类指南</span>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="../forjsp/news_center.jsp">
+                        <span class="layui-icon layui-icon-read">新闻中心</span>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="../forjsp/message.jsp">
+                        <span class="layui-icon layui-icon-read">交流中心</span>
+                    </a>
+                </li>
+                <%
+                    if(loginName==null)
+                    {
+                %>
+                <li class="layui-nav-item">
+                    <a href="../forjsp/login.jsp">
+                        <span class="layui-icon layui-icon-user">登录</span>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="../forjsp/register.jsp">
+                        <span class="layui-icon layui-icon-release">注册</span>
+                    </a>
+                </li>
+                <%
+                }
+                else
+                {
+                %>
+                <li class="layui-nav-item" id="user">
+                    <a href="../forjsp/user_center.jsp?username=<%=user.getLoginName()%>">
+                        <span class="layui-icon layui-icon-user"><%=user.getLoginName()%></span>
+                    </a>
+                </li>
+                <li class="layui-nav-item" id="out">
+                    <a href="/RemoveOut" class="out">
+                        <span class="layui-icon layui-icon-release">退出</span>
+                    </a>
+                </li>
+                <%
+                    }
+                %>
+            </ul>
+        </div>
+    </div>
 </div>
 <%
     ArrayList<Garbage> garbageList = (ArrayList<Garbage>)session.getAttribute("detail_garbage");
     int i=Integer.parseInt(request.getParameter("id"));
+    String type=garbageList.get(i).getType();
+    TypeDao typeDao=new TypeDao();
+    Type typeinfo=typeDao.getType(type);
 %>
-<p style="white-space:nowrap;">"<%=garbageList.get(i).getName()%>"属于[<%=garbageList.get(i).getType()%>]</p>
-<%--<div class="search1">--%>
-    <%--<h4>干垃圾</h4><br>--%>
-    <%--又称其它垃圾，除有害垃圾、可回收垃圾、是垃圾意外的其他生活废弃物--%>
-<%--</div>--%>
-<%--<div class="search2">--%>
-    <%--<h4>干垃圾主要包括</h4><br>--%>
-    <%--餐盒、餐巾纸、湿巾纸、卫生间用纸、塑料袋、食品包装袋、污染严重的纸、烟蒂、纸尿裤、一次性杯子、大骨头、备课等--%>
-<%--</div>--%>
-<div class="search3">
-    <h4><%=garbageList.get(i).getName()%>投放要求</h4><br>
-    <ul>
-        <li><%=garbageList.get(i).getContent()%></li>
-    </ul>
+<div class="center">
+    <p class="p_class" style="white-space:nowrap; ">"<%=garbageList.get(i).getName()%>"属于[<%=garbageList.get(i).getType()%>]</p>
+    <br>
+    <div class="search1">
+        <h4><%=type%></h4><br>
+        <%=typeinfo.getType_content()%>
+    </div>
+    <div class="search2">
+        <h4><%=type%>主要包括</h4><br>
+        <%=typeinfo.getType_clude()%>
+    </div>
+    <div class="search3">
+        <h4><%=garbageList.get(i).getName()%>投放要求</h4><br>
+        <ul>
+            <li><%=garbageList.get(i).getContent()%></li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

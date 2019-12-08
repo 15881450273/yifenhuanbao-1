@@ -7,8 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.ResourceBundle" %>
-<%@ page import="java.sql.*" %>
 <%@ page import="com.nddmwdf.program.dao.NewsDao" %>
 <%@ page import="com.nddmwdf.program.entity.News" %>
 <%@ page import="java.util.List" %>
@@ -68,7 +66,7 @@
     </div>
     <xblock>
         <%--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>--%>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./news_add.jsp')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','/jsp/news_add.jsp')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：<%= (Integer)request.getAttribute("nnum") %>条</span>
     </xblock>
 
@@ -81,6 +79,7 @@
             <th>新闻编号</th>
             <th>新闻名称</th>
             <th>新闻内容</th>
+            <th>新闻类别</th>
             <th>新闻发表时间</th>
             <th>新闻作者</th>
             <th >操作</th>
@@ -96,6 +95,7 @@
             <td>${news.id}</td>
             <td>${news.title}</td>
             <td>${news.text}</td>
+            <td>${news.type}</td>
             <td>${news.time}</td>
             <td>${news.author}</td>
 

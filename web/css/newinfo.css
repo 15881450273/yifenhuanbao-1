@@ -4,64 +4,101 @@
 }
 html ,body{
     height: 100%;
-    /*background-image: url("../img/memphis-mini.png");*/
-    /*background-repeat: repeat;*/
+    background-image:url("../img/united-squares.png");
+    background-repeat: repeat;
 }
 a{
    text-decoration: none;
     color: #000;
 }
-.newinfo_left{
+.top{
+    height: 60px;
+    background-color: #009688;
+
+}
+.top span{
+    display:inline-block;
     width: 10%;
-    /*background-color: #e0e0e0;*/
-    float: left;
-    background-color: #eef3e1;
-    height: 100%;
-    box-shadow: 10px 10px 5px #888888;
+    height: 60px;
+    margin-left: 20px;
 }
- .newinfo_left ul li{
-    list-style: none;
-    line-height: 90px;
-    letter-spacing: 1px;
-    padding-left: 32px;
+.top span p{
+    line-height: 10px;
+    letter-spacing: 3px;
+    margin-left: 70px;
+    width: 100px;
+    color:white;
+    margin-top: 25px;
+font-size: 14px;
+
 }
-.newinfo_left img{
+.top img{
     width: 50px;
     height: 50px;
-    padding-left: 50px;
-    /*float: left;*/
+    float: left;
+}
+.top_nav{
+    width: 50%;
+    height: 60px;
+    float:right;
+    /*margin-left: 280px;*/
+}
+.top_nav a{
+    text-decoration: none;
+    color:white;
+    font-size: 14px;
+
+}
+.top_nav img{
+    width: 20px;
+    height: 20px;
+}
+.top_nav ul{
+    width: 100%;
+}
+.top_nav ul li{
+    float:left;
+    margin-right: 50px;
+    margin-top: 25px;
+    list-style: none;
+}
+.top_nav ul li a img{
+    padding-right: 4px;
+}
+.top_nav ul li a img{
+    padding-right: 4px;
 }
 .newinfo_center{
-    width: 50%;
-    height: 90%;
-    position: absolute;
-    top: 0;
-    left: 273px;
-    /*margin-left: 289px;*/
-    background-image: url(../img/fred-tougas-japan-6-600x398.jpg);
-    background-repeat: no-repeat;
-    margin-top: 60px;
+    width: 66%;
+    margin: 25px auto;
+
 }
 h2{
     text-align: center;
 }
 .newinfo_new{
-    width: 550px;
-    height: 300px;
+    width: 100%;
+    /*height: 300px;*/
     margin-top: 20px;
    background-color: #fff;
-    margin-left: 16px;
+    /*margin-left: 112px;*/
     letter-spacing: 1px;
     padding: 10px;
-    opacity: 0.8;
+    opacity: 0.9;
+    box-shadow: 10px 10px 5px #888888;
 }
 .newinfo_bottom{
-    width: 150px;
+    width: 200px;
     height: 20px;
-    margin-top: 40px;
+    margin-top: 25px;
     color: #a8a8a8;
     font-size: 12px;
     position: relative;
+}
+.newinfo_bottom span{
+    color: #0C0C0C;
+    font-size: 12px;
+    margin-left: 20px;
 }
 .return a{
     width: 50px;
@@ -72,12 +109,10 @@ h2{
     left: -138px;
     font-size: 14px;
 }
-.new_center-right img{
+.new_center-right img {
     width: 18%;
     height: 545px;
     position: absolute;
     top: 0;
     left: 980px;
-
-
 }

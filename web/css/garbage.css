@@ -3,53 +3,77 @@
     margin: 0;
 }
 /*顶部导航栏部分*/
+a{
+    text-decoration: none;
+    color:white;
+}
+hr{
+    margin-top: 10px;
+
+}
 .top{
-    height: 100px;
+    height: 60px;
+    background-color: #009688;
+
 }
 .top span{
     display:inline-block;
-    width: 100px;
-    height: 80px;
-    margin-left: 45px;
-    margin-top: 15px;
+    width: 10%;
+    height: 60px;
+    margin-left: 20px;
 }
 .top span p{
     line-height: 10px;
     letter-spacing: 3px;
+    margin-left: 70px;
+    width: 100px;
+    color:white;
+    margin-top: 25px;
+    font-size: 14px;
+
 }
 .top img{
     width: 50px;
     height: 50px;
+    float: left;
 }
 .top_nav{
-    width: 250px;
+    width: 50%;
+    height: 60px;
     float:right;
+    /*margin-left: 280px;*/
 }
 .top_nav a{
     text-decoration: none;
-    font-size: 15px;
-    color: #000;
+    color:white;
+    font-size: 14px;
 
 }
 .top_nav img{
     width: 20px;
     height: 20px;
 }
+.top_nav ul{
+    width: 100%;
+}
 .top_nav ul li{
     float:left;
-    margin-right: 40px;
-    margin-top: 20px;
+    margin-right: 50px;
+    margin-top: 25px;
     list-style: none;
-
 }
 .top_nav ul li a img{
     padding-right: 4px;
 }
+.top_nav ul li a img{
+    padding-right: 4px;
+}
+
 /*视频部分*/
 .video{
     width: 1000px;
     height: 320px;
-    margin:auto;
+    margin:10px auto;
     position: relative;
 }
 .video video{
@@ -89,15 +113,18 @@
 /*垃圾分类图片部分*/
 .garbage{
     width: 100%;
-    height: 600px;
+    height: 930px;
 }
 .garbage_left{
     width: 100%;
     height: 500px;
     position: relative;
-    background-color: #033e42;
+    background-color: #009688;
     margin-top: 40px;
     overflow: hidden;
+}
+.garbage_name{
+    width: 1100px;
 }
 .garbage_name li{
     width: 80px;
@@ -107,14 +134,18 @@
     color:white;
    list-style: none;
     line-height: 50px;
-    text-align: center;
 
 }
 .garbage_name li:first-child{
     margin-top: 50px;
 }
+#more{
+    position:absolute;
+    top: 450px;
+    right: 50px;
+}
 .garbage .garbage_img{
-    width: 100%;
+    width: 70%;
     height: 500px;
     position: absolute;
     top: 30px;
@@ -150,10 +181,12 @@
     display: none;
 }
 .garbage_img .show{
+    width: 1050px;
+    height: 500px;
     display: block;
 }
 .garbage_name .current{
-    background-color: olivedrab;
+    background-color: rgba(217,217,217,0.85);
 }
 .span_more{
     position: absolute;
@@ -163,8 +196,10 @@
     text-decoration: none;
 }
 .location{
-    width: 50%;
-    height: 100px;
+    width: 100%;
+    height: 500px;
+    /*background-image: url(../img/lilypads.png);*/
+    /*background-repeat: repeat;*/
 }
 .location p{
     margin-top: 10px;
@@ -172,14 +207,15 @@
 }
 .bottom{
     width: 100%;
+    /*height: 200px;*/
     background-color: #e2dfdf;
-    position: absolute;
+    /*position: absolute;*/
 
 }
 .bottom ul {
     float: left;
     list-style: none;
-    margin: 20px 116px;
+    margin: 20px 100px;
     line-height: 30px;
     text-align: center;
 
@@ -187,5 +223,5 @@
 .bottom .contact img{
     width: 40px;
     height: 40px;
-z-index: 2;
+     z-index: 2;
 }

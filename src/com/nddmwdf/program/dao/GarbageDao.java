@@ -17,6 +17,7 @@ public class GarbageDao {
         try {
             Statement st = con.createStatement();
             st.executeUpdate(sql);
+            st.close();
             dbUtil.closeCon();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -31,6 +32,7 @@ public class GarbageDao {
         try {
             Statement st = con.createStatement();
             st.executeUpdate(sql);
+            st.close();
             dbUtil.closeCon();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,6 +47,7 @@ public class GarbageDao {
         try {
             Statement st = con.createStatement();
             st.executeUpdate(sql);
+            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -81,6 +84,8 @@ public class GarbageDao {
             {
                 return null;
             }
+            rs.close();
+            ps.close();
             dbUtil.closeCon();
             return list;
         } catch (SQLException e) {
@@ -129,14 +134,93 @@ public class GarbageDao {
             resultSet=st.executeQuery(sql);
             resultSet.next();
             totalgarbage=resultSet.getInt(1);
+            resultSet.close();
             return totalgarbage;
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+
         dbUtil.closeCon();
         return 0;
     }
 
+    public List<Garbage> typelist(String type) throws SQLException
+    {
+        String sql="SELECT * FROM garbage where garbage_type ='"+type +"'";
+        DbUtil dbUtil=new DbUtil();
+        Connection con=dbUtil.getConnection();
+        ResultSet resultSet;
+        PreparedStatement ps=con.prepareStatement(sql);
+        resultSet=ps.executeQuery();
+        List<Garbage> gb = new ArrayList();
+        while(resultSet.next())
+        {
+            Garbage garbage=new Garbage();
+            garbage.setName(resultSet.getString("garbage_name"));
+            garbage.setContent(resultSet.getString("garbage_content"));
+            garbage.setType(resultSet.getString("garbage_type"));
+            gb.add(garbage);
+        }
+        resultSet.close();
+        ps.close();
+        dbUtil.closeCon();
+        return gb;
+    }
+
+    public int isExists(String garbagename)
+    {
+        String sql="SELECT * from garbage where garbage_name=?";
+        DbUtil dbUtil=new DbUtil();
+        Connection con=dbUtil.getConnection();
+        PreparedStatement ps=null;
+        ResultSet resultSet=null;
+        Garbage garbage=null;
+        try
+        {
+            ps=(PreparedStatement)con.prepareStatement(sql);
+            ps.setString(1,garbagename);
+            resultSet=(ResultSet)ps.executeQuery();
+            if(resultSet.next())
+            {
+                garbage=new Garbage();
+                garbage.setId(resultSet.getInt("garbage_id"));
+                garbage.setName(resultSet.getString("garbage_name"));
+            }
+            resultSet.close();
+            ps.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        if(garbage!=null)
+        {
+            return 1;
+        }
+        dbUtil.closeCon();
+        return 0;
+    }
+
+    public Garbage getGarbage(String garbagename) throws SQLException
+    {
+        String sql="select * from garbage where garbage_name = '" + garbagename +"'";
+        DbUtil dbUtil = new DbUtil();
+        Connection con = dbUtil.getConnection();
+        ResultSet resultSet = null;
+        PreparedStatement ps = con.prepareStatement(sql);
+        resultSet = ps.executeQuery();
+        Garbage garbage = new Garbage();
+        while (resultSet.next()) {
+            garbage.setId(resultSet.getInt("garbage_id"));
+            garbage.setName(resultSet.getString("garbage_name"));
+            garbage.setContent(resultSet.getString("garbage_content"));
+            garbage.setType(resultSet.getString("garbage_type"));
+        }
+        resultSet.close();
+        ps.close();
+        dbUtil.closeCon();
+        return garbage;
+    }
 }
